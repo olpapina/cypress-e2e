@@ -9,6 +9,10 @@ class HomePage {
         this.navigateMenu = '#nav-xshop'
     }
 
+    openHomePage() {
+        cy.visit('/')
+    }
+
     clickActualDeliveryLocation() {
         cy.get(this.deliveryLocationIcon).click()
         return new SelectLocationPage

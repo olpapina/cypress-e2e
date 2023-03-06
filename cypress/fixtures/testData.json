@@ -1,6 +1,6 @@
 {
     "zipCode": "83877",
-    "impossibleDelivery": "Poland",
+    "impossibleDelivery": "Belarus",
     "possibleDelivery": "Post Falls",
     "validationMessage": "This item cannot be shipped to your selected delivery location. Please choose a different delivery location.",
     "searchText": "gift card"

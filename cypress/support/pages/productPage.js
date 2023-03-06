@@ -3,34 +3,34 @@ export class ProductPage {
         this.deliveryValidationMessage = '.a-color-error'
         this.deliveryLocation = '#contextualIngressPtLabel_deliveryShortLine'
         this.deliveryType = '#gc-delivery-mechanism-button-Email-announce'
-        this.addToCardButton = '#gc-buy-box-atc-button'
-        this.buyNowButton = '#gc-buy-box-bn-button'
-        this.inactiveAddToCart = '[#exportsUndeliverable-cart-announce].a-button-input'
-    }
-
-    getDeliveryValidationMessageText() {
-        return cy.get(this.deliveryValidationMessage).outerText
+        this.addToCardButton1 = '#add-to-cart-button'
+        this.addToCardButton2 = '#addToCart_feature_div'
+        this.buyNowButton = '#buyNow_feature_div'
+        this.inactiveAddToCart = '#exportsUndeliverable-cart-announce'
     }
 
     getDeliveryValidationMessage() {
-        return cy.get(this.deliveryValidationMessage)
+        return cy.get(this.deliveryValidationMessage).invoke('text')
     }
 
-    isAddToCartButton(activeStatus) {
+    checkAddToCartButton(activeStatus) {
         if (activeStatus==='inactive') {
-            if (cy.get(this.inactiveAddToCart)) return true
-            else return false
+            cy.get(this.inactiveAddToCart).should('exist')
         } else {
-            if (cy.get(this.addToCardButton) && cy.get(this.buyNowButton)) return true
-            else return false
+            cy.get(this.addToCardButton1).should('exist') || cy.get(this.addToCardButton2).should('exist')
+            cy.get(this.buyNowButton).should('exist')
         }
     }
 
     getDeliveryStatus() {
-        return cy.get(this.deliveryLocation).outerText
+        return cy.get(this.deliveryLocation).invoke('text')
     }
 
     getDeliveryType() {
-        return cy.get(this.deliveryType).invoke('text')
+        return cy.get(this.deliveryType).invoke('val')
+    }
+
+    backToResultPage() {
+        cy.go('back')
     }
 }

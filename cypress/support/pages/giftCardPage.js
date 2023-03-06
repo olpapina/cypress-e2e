@@ -3,33 +3,23 @@ import { ResultPage } from "./resultPage";
 
 export class GiftCardPage {
     constructor() {
-        this.typeEGiftCard = '[alt="eGift Cards"].bxc-grid__image'
-        this.typePhysicalGiftCard = '[alt="Physical gift cards"].bxc-grid__image'
+        this.typeOfCard = '[class="bxc-grid__image   bxc-grid__image--light"]'
     }
 
     selectTypeGiftCard(typeValue) {
         let resultPage;
         switch (typeValue) {
             case 'eGift':
-                cy.get(this.typeEGiftCard).click()
-                resultPage = new ProductPage
+                cy.get(this.typeOfCard).eq(6).click()
+                resultPage = new ProductPage()
                 break;
             case 'Mail':
-                cy.get(this.typePhysicalGiftCard).click()
-                resultPage = new ResultPage
+                cy.get(this.typeOfCard).eq(7).click()
+                resultPage = new ResultPage()
                 break;
             default:
                 console.log("Error: type is not choise")
-
         }
+        return resultPage
     }
-
-    getEGiftCard() {
-        cy.get(typeEGiftCard)
-    }
-
-    getPhysicalGiftCard() {
-        cy.get(typePhysicalGiftCard)
-    }
-    
 }

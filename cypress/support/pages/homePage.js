@@ -1,10 +1,18 @@
 import { GiftCardPage } from "./giftCardPage"
 import { SelectLocationPage } from "./selectLocationPage"
+const LocationPopUp = require("../../support/components/locationPopUp")
+const TopDropMenu = require("../../support/components/topDropMenu")
+const MenuBar = require("../../support/components/menuBar")
+const SearchBox = require("../../support/components/searchBox")
 
 class HomePage {
     constructor() {
+        this.locationPopUp = new LocationPopUp()
+        this.topDropMenu = new TopDropMenu()
+        this.menuBar = new MenuBar()
+        this.searchBox = new SearchBox()
         this.deliveryLocationIcon = '#nav-packard-glow-loc-icon'
-        this.topMenuButton = 'button[#nav-hamburger-menu]'
+        this.topMenuButton = '#nav-hamburger-menu'
         this.actualDeliveryLocation = '#glow-ingress-line2'
         this.navigateMenu = '#nav-xshop'
     }
@@ -15,7 +23,7 @@ class HomePage {
 
     clickActualDeliveryLocation() {
         cy.get(this.deliveryLocationIcon).click()
-        return new SelectLocationPage
+        return new SelectLocationPage()
     }
 
     getActualDeliveryLocation() {
@@ -24,12 +32,28 @@ class HomePage {
 
     clickTopMenu() {
         cy.get(this.topMenuButton).click()
-        //return new TopMenu  - will be added in task3
+        return this.topDropMenu
     }
 
     clickGiftCardButton() {
-        cy.get(this.navigateMenu).find('Gift Cards').click()
-        return new GiftCardPage
+        cy.get(this.navigateMenu).contains('Gift Cards').click()
+        return new GiftCardPage()
+    }
+
+    getLocationPopUp() {
+        return this.locationPopUp
+    } 
+
+    getTopDropMenu() {
+        return this.topDropMenu
+    }
+
+    getMenuBar() {
+        return this.menuBar
+    }
+
+    getSearchBox() {
+        return this.searchBox
     }
 }
 

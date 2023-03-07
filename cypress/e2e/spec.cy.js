@@ -50,7 +50,7 @@ describe('Tests verify Gift Card Delivery according to location', () => {
     for (let i = 1; i < 3; i++) {
       const productPage = resultPage.getResultBlock().clickResultLink(i)
       productPage.getDeliveryValidationMessage().should('not.contain', expectedTextMessage)
-      productPage.getDeliveryStatus().should('contain', '83877')
+      productPage.getDeliveryStatus().should('contain', testData.zipCode)
       productPage.backToResultPage()
     }
   })

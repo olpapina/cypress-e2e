@@ -15,6 +15,8 @@ class HomePage {
         this.topMenuButton = '#nav-hamburger-menu'
         this.actualDeliveryLocation = '#glow-ingress-line2'
         this.navigateMenu = '#nav-xshop'
+        this.logo = '#nav-logo-sprites'
+        this.signIn = '[class="nav-signin-tt nav-flyout"]'
     }
 
     openHomePage() {
@@ -54,6 +56,14 @@ class HomePage {
 
     getSearchBox() {
         return this.searchBox
+    }
+
+    getLogo() {
+        return cy.get(this.logo)
+    }
+
+    getSignIn() {
+        return cy.get(this.signIn)
     }
 }
 

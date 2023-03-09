@@ -4,6 +4,7 @@ class LocationPopUp {
     constructor() {
         this.changeAddressButton = '.glow-toaster-button-submit'
         this.notChangeButton = '.glow-toaster-button-dismiss'
+        this.locationPopUpBody = '#glow-toaster-body'
     }
 
     clickChangeAddressButton() {
@@ -13,6 +14,10 @@ class LocationPopUp {
 
     clickNotChangeButton() {
         cy.get(this.notChangeButton).click()
+    }
+
+    getPopUpBody() {
+        return cy.get(this.locationPopUpBody)
     }
 }
 

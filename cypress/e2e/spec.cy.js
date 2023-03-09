@@ -62,7 +62,7 @@ describe('Tests verify searching and filtering functionality', () => {
     resultPage.getResultBlock().getResultSearchLinks()
       .should('exist')
       .each(link => {
-        expect(link.text()).to.contain('iPhone')
+        expect(link.text()).to.contain(testData.searchText)
       })
   })
 
@@ -159,7 +159,7 @@ describe('Tests verify Gift Card Delivery according to location', () => {
     const giftCardPage = homePage.getMenuBar().clickGiftCardTabButton()
     const productPage = giftCardPage.selectTypeGiftCard('eGift')
     productPage.getDeliveryType().then(value => {
-      expect(value).to.equal('Email')
+      expect(value).to.equal(testData.typeDelivery)
     })
   })
 

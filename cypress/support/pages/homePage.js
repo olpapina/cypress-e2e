@@ -1,9 +1,11 @@
 import { GiftCardPage } from "./giftCardPage"
 import { SelectLocationPage } from "./selectLocationPage"
+import { SignInPage } from "./signInPage"
 const LocationPopUp = require("../../support/components/locationPopUp")
 const TopDropMenu = require("../../support/components/topDropMenu")
 const MenuBar = require("../../support/components/menuBar")
 const SearchBox = require("../../support/components/searchBox")
+const SignInPopUp = require("../../support/components/signInPopUp")
 
 class HomePage {
     constructor() {
@@ -11,6 +13,7 @@ class HomePage {
         this.topDropMenu = new TopDropMenu()
         this.menuBar = new MenuBar()
         this.searchBox = new SearchBox()
+        this.signInPopUp = new SignInPopUp()
         this.deliveryLocationIcon = '#nav-packard-glow-loc-icon'
         this.topMenuButton = '#nav-hamburger-menu'
         this.actualDeliveryLocation = '#glow-ingress-line2'
@@ -64,6 +67,10 @@ class HomePage {
 
     getSignIn() {
         return cy.get(this.signIn)
+    }
+
+    getSignInPopUp() {
+        return this.signInPopUp
     }
 }
 

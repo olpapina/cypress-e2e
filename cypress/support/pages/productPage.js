@@ -1,3 +1,5 @@
+import { ResultPage } from "./resultPage"
+
 export class ProductPage {
     constructor() {
         this.deliveryValidationMessage = '.a-color-error'
@@ -7,6 +9,7 @@ export class ProductPage {
         this.addToCardButton2 = '#addToCart_feature_div'
         this.buyNowButton = '#buyNow_feature_div'
         this.inactiveAddToCart = '#exportsUndeliverable-cart-announce'
+        this.spinner = '.a-spinner-wrapper'
     }
 
     getDeliveryValidationMessage() {
@@ -32,5 +35,10 @@ export class ProductPage {
 
     backToResultPage() {
         cy.go('back')
+        return new ResultPage()
+    }
+
+    waitUntilLoadingCircleHides() {
+        cy.get(this.spinner).should('be.not.visible')
     }
 }

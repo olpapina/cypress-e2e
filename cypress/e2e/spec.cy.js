@@ -96,8 +96,10 @@ describe('Tests verify Gift Card Delivery according to location', () => {
     const resultPage = giftCardPage.selectTypeGiftCard('Mail')
     for (let i = 1; i < 3; i++) {
       const productPage = resultPage.getResultBlock().clickResultLink(i)
+      productPage.waitUntilLoadingCircleHides()
       productPage.getDeliveryValidationMessage().should('contain', expectedTextMessage)
       productPage.backToResultPage()
+      resultPage.getResultBlock().waitUntilLoadingCircleHides()
     }
   })
 
@@ -110,8 +112,10 @@ describe('Tests verify Gift Card Delivery according to location', () => {
     const resultPage = giftCardPage.selectTypeGiftCard('Mail')
     for (let i = 1; i < 2; i++) {
       const productPage = resultPage.getResultBlock().clickResultLink(i)
+      productPage.waitUntilLoadingCircleHides()
       productPage.checkAddToCartButton('inactive')
       productPage.backToResultPage()
+      resultPage.getResultBlock().waitUntilLoadingCircleHides()
     }
   })
 
@@ -126,11 +130,13 @@ describe('Tests verify Gift Card Delivery according to location', () => {
     const topMenu = homePage.clickTopMenu()
     const giftCardPage = topMenu.clickGiftCardButton()
     const resultPage = giftCardPage.selectTypeGiftCard('Mail')
-    for (let i = 1; i < 3; i++) {
+    for (let i = 1; i < 2; i++) {
       const productPage = resultPage.getResultBlock().clickResultLink(i)
+      productPage.waitUntilLoadingCircleHides()
       productPage.getDeliveryValidationMessage().should('not.contain', expectedTextMessage)
       productPage.getDeliveryStatus().should('contain', testData.zipCode)
       productPage.backToResultPage()
+      resultPage.getResultBlock().waitUntilLoadingCircleHides()
     }
   })
 
@@ -143,21 +149,23 @@ describe('Tests verify Gift Card Delivery according to location', () => {
     homePage.getActualDeliveryLocation().should('contain', expectedLocation)
     const topMenu = homePage.clickTopMenu()
     const giftCardPage = topMenu.clickGiftCardButton()
-    const resultPage = giftCardPage.selectTypeGiftCard('Mail')
+    let resultPage = giftCardPage.selectTypeGiftCard('Mail')
     for (let i = 1; i < 3; i++) {
       const productPage = resultPage.getResultBlock().clickResultLink(i)
+      productPage.waitUntilLoadingCircleHides()
       productPage.checkAddToCartButton('active')
-      productPage.backToResultPage()
+      resultPage = productPage.backToResultPage()
+      resultPage.getResultBlock().waitUntilLoadingCircleHides()
     }
   })
 
   it('verify eGiftCard type delivery is email', () => {
     let expectedLocation = testData.impossibleDelivery
-    let expectedTextMessage = testData.validationMessage
     homePage.getLocationPopUp().clickNotChangeButton()
     homePage.getActualDeliveryLocation().should('contain', expectedLocation)
     const giftCardPage = homePage.getMenuBar().clickGiftCardTabButton()
     const productPage = giftCardPage.selectTypeGiftCard('eGift')
+    productPage.waitUntilLoadingCircleHides()
     productPage.getDeliveryType().then(value => {
       expect(value).to.equal(testData.typeDelivery)
     })

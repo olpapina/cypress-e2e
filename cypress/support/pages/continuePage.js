@@ -4,6 +4,6 @@ export class ContinuePage {
     }
 
     clickContinueButton() {
-        cy.get(this.continueButton).contains('Continue').click({force: true})
+        cy.get(this.continueButton).contains('Continue', {timeout: 6000}).click({force: true})
     }
 }

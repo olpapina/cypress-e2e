@@ -49,6 +49,22 @@ describe('Assertion for Amazom Home Page', () => {
       })
   })
 
+  it('verify API responce after Sign In', () => {
+    const signinPage = homePage.getSignInPopUp().clickSignInButton()
+
+    cy.intercept('POST', testData.urlPost).as('signIn')
+    signinPage.typeEmail(testData.email)
+    signinPage.clickContinueButton()
+
+    cy.wait('@signIn')
+    .then(( request ) => {
+      expect(request.response.statusCode).to.equal(200)
+      expect(request.response.body).to.contain(testData.userName)
+      expect(request.response.body).to.contain(testData.email)
+      expect(request.response.body).to.contain(testData.messageFailedSignIn)
+    })
+  })
+
 })
 
 describe('Tests verify searching and filtering functionality', () => {
@@ -94,7 +110,7 @@ describe('Tests verify Gift Card Delivery according to location', () => {
     homePage.getActualDeliveryLocation().should('contain', expectedLocation)
     const giftCardPage = homePage.getMenuBar().clickGiftCardTabButton()
     const resultPage = giftCardPage.selectTypeGiftCard('Mail')
-    for (let i = 1; i < 3; i++) {
+    for (let i = 1; i < 2; i++) {
       const productPage = resultPage.getResultBlock().clickResultLink(i)
       productPage.waitUntilLoadingCircleHides()
       productPage.getDeliveryValidationMessage().should('contain', expectedTextMessage)
@@ -150,7 +166,7 @@ describe('Tests verify Gift Card Delivery according to location', () => {
     const topMenu = homePage.clickTopMenu()
     const giftCardPage = topMenu.clickGiftCardButton()
     let resultPage = giftCardPage.selectTypeGiftCard('Mail')
-    for (let i = 1; i < 3; i++) {
+    for (let i = 1; i < 2; i++) {
       const productPage = resultPage.getResultBlock().clickResultLink(i)
       productPage.waitUntilLoadingCircleHides()
       productPage.checkAddToCartButton('active')

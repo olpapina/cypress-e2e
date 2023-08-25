@@ -10,6 +10,7 @@ export class ProductPage {
         this.buyNowButton = '#buyNow_feature_div'
         this.inactiveAddToCart = '#exportsUndeliverable-cart-announce'
         this.spinner = '.a-spinner-wrapper'
+        this.memoryStorage = '.po-memory_storage_capacity'
     }
 
     getDeliveryValidationMessage() {
@@ -40,5 +41,9 @@ export class ProductPage {
 
     waitUntilLoadingCircleHides() {
         cy.get(this.spinner).should('be.not.visible')
+    }
+
+    getMemoryStorageCapacity() {
+        return cy.get(this.memoryStorage)
     }
 }
